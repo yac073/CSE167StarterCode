@@ -16,14 +16,12 @@ void Window::clean_up()
 
 GLFWwindow* Window::create_window(int width, int height)
 {
-#ifndef __APPLE__
-	// Initialize GLFW. Do NOT do this on OSX devices
+	// Initialize GLFW.
 	if (!glfwInit())
 	{
 		fprintf(stderr, "Failed to initialize GLFW\n");
 		return NULL;
 	}
-#endif
 
 	// 4x antialiasing
 	glfwWindowHint(GLFW_SAMPLES, 4);
