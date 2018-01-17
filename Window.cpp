@@ -1,7 +1,7 @@
 #include "Window.h"
 
 const char* window_title = "GLFW Starter Project";
-Cube cube(5.0f);
+SpinningCube cube;
 
 int Window::width;
 int Window::height;
@@ -71,7 +71,7 @@ void Window::resize_callback(GLFWwindow* window, int width, int height)
 void Window::idle_callback()
 {
 	// Perform any updates as necessary. Here, we will spin the cube slightly.
-	cube.update();
+	cube.Update();
 }
 
 void Window::display_callback(GLFWwindow* window)
@@ -84,7 +84,7 @@ void Window::display_callback(GLFWwindow* window)
 	glLoadIdentity();
 	
 	// Render objects
-	cube.draw();
+	cube.Draw();
 
 	// Gets events, including input such as keyboard and mouse or window resizing
 	glfwPollEvents();

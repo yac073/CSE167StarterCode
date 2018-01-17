@@ -1,15 +1,15 @@
 ////////////////////////////////////////
-// cube.h
+// SpinningCube.h
 ////////////////////////////////////////
 
-#ifndef CSE169_CUBE_H
-#define CSE169_CUBE_H
+#pragma once
 
-#include "core.h"
-#include "vector3.h"
-#include "matrix34.h"
+#include "Model.h"
 
 ////////////////////////////////////////////////////////////////////////////////
+
+// SpinningCube is an example of a basic animating object. It can be used as a
+// pattern for creating more complex objects.
 
 class SpinningCube {
 public:
@@ -17,24 +17,18 @@ public:
 
 	void Update();
 	void Reset();
-	void Draw();
+	void Draw(const glm::mat4 &viewProjMtx,uint shader);
 
 private:
 	// Constants
-	float Size;
-	Vector3 Position;
-	Vector3 Axis;
+	Model CubeModel;
+	glm::vec3 Position;
+	glm::vec3 Axis;
+	float SpinDelta;
 
 	// Variables
 	float Angle;
-	Matrix34 WorldMtx;
+	glm::mat4x4 WorldMtx;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-
-/*
-SpinningCube is an example of a basic animating object. It can be used as a
-pattern for creating more complex objects.
-*/
-
-#endif

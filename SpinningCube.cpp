@@ -1,16 +1,17 @@
 ////////////////////////////////////////
-// cube.cpp
+// SpinningCube.cpp
 ////////////////////////////////////////
 
-#include "cube.h"
+#include "SpinningCube.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 SpinningCube::SpinningCube() {
 	// Initialize constant data
-	Size=1.0f;
-	Position=Vector3::ORIGIN;
-	Axis=Vector3::YAXIS;
+	Position=glm::vec3(0);
+	Axis=glm::vec3(0,1,0);		// Y-Axis
+	CubeModel.MakeBox(glm::vec3(-1),glm::vec3(1));
+	SpinDelta=0.01f;
 
 	// Resets variable data
 	Reset();
@@ -20,25 +21,23 @@ SpinningCube::SpinningCube() {
 
 void SpinningCube::Update() {
 	// Update (animate) any variable properties
-	Angle+=0.005f;
-	WorldMtx.MakeRotateUnitAxis(Axis,Angle);
-	WorldMtx.d=Position;
+	Angle+=SpinDelta;
+	WorldMtx=glm::rotate(glm::mat4(1.0f),Angle,Axis);
+	WorldMtx[3]=glm::vec4(Position,1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void SpinningCube::Reset() {
 	// Reset dynamic variables to a default state
-	Angle=0.0f;
-	WorldMtx.Identity();
+	Angle=0;
+	WorldMtx=glm::mat4(1);		// Reset to identity matrix
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void SpinningCube::Draw() {
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(WorldMtx);
-	glutWireCube(Size);
+void SpinningCube::Draw(const glm::mat4 &viewProjMtx,uint shader) {
+	CubeModel.Draw(WorldMtx,viewProjMtx,shader);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
