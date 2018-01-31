@@ -26,3 +26,5 @@ void Skeleton::Draw(const glm::mat4 &viewProjMtx, uint shader)
 {
 	base->Draw(viewProjMtx, shader);
 }
+
+
