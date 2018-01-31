@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BallJoint.h" />
+    <ClInclude Include="src\bmpLoader.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\core.h" />
     <ClInclude Include="src\dof.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\Skeleton.h" />
     <ClInclude Include="src\skin.h" />
+    <ClInclude Include="src\SkinDrawer.h" />
     <ClInclude Include="src\SpinningCube.h" />
     <ClInclude Include="src\tester.h" />
     <ClInclude Include="src\Tokenizer.h" />
@@ -37,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BallJoint.cpp" />
+    <ClCompile Include="src\bmpLoader.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\core.cpp" />
     <ClCompile Include="src\dof.cpp" />
@@ -46,6 +49,7 @@
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Skeleton.cpp" />
     <ClCompile Include="src\skin.cpp" />
+    <ClCompile Include="src\SkinDrawer.cpp" />
     <ClCompile Include="src\SpinningCube.cpp" />
     <ClCompile Include="src\tester.cpp" />
     <ClCompile Include="src\Tokenizer.cpp" />

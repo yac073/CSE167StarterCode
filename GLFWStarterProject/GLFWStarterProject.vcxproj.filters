@@ -60,6 +60,12 @@
     <ClInclude Include="src\vector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\SkinDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bmpLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BallJoint.cpp">
@@ -102,6 +108,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vector3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SkinDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bmpLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

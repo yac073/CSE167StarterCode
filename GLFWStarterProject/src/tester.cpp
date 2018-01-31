@@ -45,7 +45,7 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	glutSetWindow( WindowHandle );
 
 	// Background color
-	glClearColor( 0., 0., 0., 1. );
+	glClearColor( 1., 1., 1., 1. );
 
 	// Callbacks
 	glutDisplayFunc( display );
@@ -70,12 +70,16 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 		fileName = argv[1];
 	}
 	Skel->Load(fileName);
-	skin = new Skin(Skel);
+	skin = new Skin(Skel, argc > 3);
 	fileName = "wasp.skin";
 	if (argc > 2) {
 		fileName = argv[2];
 	}
 	skin->Load(fileName);
+	if (argc > 3) {
+		skin->LoadMorph(0, argv[3]);
+		skin->LoadMorph(1, argv[4]);
+	}
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
 }
@@ -121,11 +125,12 @@ void Tester::Draw() {
 	// Begin drawing scene
 	glViewport(0, 0, WinX, WinY);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(1., 1., 1., 1.);
 
 	// Draw components
 	//Cube->Draw(Cam->GetViewProjectMtx(),Program->GetProgramID());
-	Skel->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
-
+	//Skel->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
+	skin->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
 	// Finish drawing scene
 	glFinish();
 	glutSwapBuffers();
@@ -180,6 +185,12 @@ void Tester::Keyboard(int key,int x,int y) {
 			break;
 		case 'y':
 			Skel->ModJoint(0.1f, 0, 0);
+			break;
+		case '1':
+			skin->startm1();
+			break;
+		case '2':
+			skin->startm2();
 			break;
 	}
 }

@@ -21,3 +21,9 @@ typedef unsigned int uint;
 // STD library
 #include <vector>
 #include <ctype.h>
+
+struct ModelVertex {
+	glm::vec3 Position;
+	glm::vec3 Normal;
+	glm::vec2 TexCoord;
+};
