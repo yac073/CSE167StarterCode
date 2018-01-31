@@ -57,6 +57,9 @@
     <ClInclude Include="Skeleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="skin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\OBJObject.cpp">
@@ -98,6 +101,9 @@
     <ClCompile Include="Skeleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="skin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -111,6 +117,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="..\wasp.skel">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Model.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\tube_smooth.skin">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

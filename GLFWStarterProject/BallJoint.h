@@ -18,6 +18,7 @@ public:
 		BoxMax = glm::vec3(0.1f);
 		Pose = glm::vec3(0.0f);
 		model = new Model();
+		parent = nullptr;
 	};
 	~BallJoint();
 	void Update();
@@ -25,4 +26,5 @@ public:
 	void AddChild(Joint* j);
 	void Draw(const glm::mat4 &viewProjMtx, uint shader);
 	void SetChildrenWorldTransform(glm::mat4);
+	void SetParent(Joint *);
 };

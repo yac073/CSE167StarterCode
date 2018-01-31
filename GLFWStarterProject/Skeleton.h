@@ -5,6 +5,7 @@ class Skeleton {
 private:
 	BallJoint* base;
 public:
+	BallJoint* activeJoint;
 	Skeleton();
 	bool Load(const char *file);
 	void Update();

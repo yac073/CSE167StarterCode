@@ -10,12 +10,12 @@ BallJoint::~BallJoint()
 
 void BallJoint::Update()
 {
-	localTransform = worldTransform * glm::translate(glm::mat4(1.0f), Offset) *
+	localTransform = glm::translate(glm::mat4(1.0f), Offset) *
 		glm::rotate(glm::mat4(1.0f), dofZ.getValue(Pose.z), glm::vec3(0.0f, 0.0f, 1.0f)) *
 		glm::rotate(glm::mat4(1.0f), dofY.getValue(Pose.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
 		glm::rotate(glm::mat4(1.0f), dofX.getValue(Pose.x), glm::vec3(1.0f, 0.0f, 0.0f));	
 	for each(auto child in children) {
-		child->SetChildrenWorldTransform(localTransform);
+		child->SetChildrenWorldTransform(worldTransform * localTransform);
 		child->Update();
 	}
 }
@@ -77,11 +77,12 @@ bool BallJoint::Load(Tokenizer & t)
 void BallJoint::AddChild(Joint * j)
 {
 	children.push_back(j);
+	j->SetParent(this);
 }
 
 void BallJoint::Draw(const glm::mat4 &viewProjMtx, uint shader)
 {	
-	model->Draw(localTransform, viewProjMtx, shader);
+	model->Draw(worldTransform * localTransform, viewProjMtx, shader);
 	for each(auto child in children) {
 		child->Draw(viewProjMtx, shader);
 	}
@@ -90,4 +91,9 @@ void BallJoint::Draw(const glm::mat4 &viewProjMtx, uint shader)
 void BallJoint::SetChildrenWorldTransform(glm::mat4 m)
 {
 	worldTransform = glm::mat4(m);
+}
+
+void BallJoint::SetParent(Joint * p)
+{
+	parent = p;
 }
