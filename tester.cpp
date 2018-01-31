@@ -150,6 +150,10 @@ void Tester::Keyboard(int key,int x,int y) {
 		case 'r':
 			Reset();
 			break;
+		case 'n':
+			break;
+		case 'm':
+			break;
 	}
 }
 
