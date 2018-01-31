@@ -7,7 +7,8 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "SpinningCube.h"
-#include "GLFWStarterProject/Skeleton.h"
+#include "Skeleton.h"
+#include "skin.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,6 +47,7 @@ private:
 	SpinningCube *Cube;
 	Skeleton * Skel;
 	Camera *Cam;
+	Skin * skin;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

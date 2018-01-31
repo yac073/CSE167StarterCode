@@ -1,6 +1,7 @@
 #pragma once
-#include "../core.h"
-#include "../Tokenizer.h"
+#include "core.h"
+#include "Tokenizer.h"
+#include "Skeleton.h"
 #include <vector>
 using namespace std;
 using namespace glm;
@@ -15,9 +16,13 @@ private:
 	vector<vector<JointWeight>> skinWeights;
 	vector<vec3> triangles;
 	vector<mat4x3> bindings;
+	Skeleton * skel;
+
 public:
-	Skin();
-	bool Load(Tokenizer& t);
+	Skin(Skeleton*);
+	vector<ModelVertex> vtx;
+	vector<uint> itx;
+	bool Load(const char *file);
 	void Update();
 	void Draw(const glm::mat4 &viewProjMtx, uint shader);
 };

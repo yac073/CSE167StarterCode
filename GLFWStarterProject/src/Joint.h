@@ -1,7 +1,7 @@
 #pragma once
-#include "../core.h"
+#include "core.h"
 #include "dof.h"
-#include "../Tokenizer.h"
+#include "Tokenizer.h"
 #include <vector>
 using namespace std;
 class Joint {
@@ -11,7 +11,7 @@ public:
 	Joint * parent;
 	vector<Joint *> children;
 	virtual void Update() = 0;
-	virtual bool Load(Tokenizer &) = 0;
+	virtual bool Load(Tokenizer &, vector<Joint*> *) = 0;
 	virtual void AddChild(Joint *) = 0;
 	virtual void Draw(const glm::mat4 &viewProjMtx, uint shader) = 0;
 	virtual void SetChildrenWorldTransform(glm::mat4) = 0;

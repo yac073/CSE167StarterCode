@@ -15,114 +15,120 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\OBJObject.h">
+    <ClInclude Include="src\BallJoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\camera.h">
+    <ClInclude Include="src\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\core.h">
+    <ClInclude Include="src\core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\matrix34.h">
+    <ClInclude Include="src\dof.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\tester.h">
+    <ClInclude Include="src\Joint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\vector3.h">
+    <ClInclude Include="src\matrix34.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Model.h">
+    <ClInclude Include="src\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shader.h">
+    <ClInclude Include="src\OBJObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\SpinningCube.h">
+    <ClInclude Include="src\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Tokenizer.h">
+    <ClInclude Include="src\Skeleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dof.h">
+    <ClInclude Include="src\skin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Joint.h">
+    <ClInclude Include="src\SpinningCube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BallJoint.h">
+    <ClInclude Include="src\tester.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Skeleton.h">
+    <ClInclude Include="src\Tokenizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="skin.h">
+    <ClInclude Include="src\vector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\OBJObject.cpp">
+    <ClCompile Include="src\BallJoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\camera.cpp">
+    <ClCompile Include="src\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\core.cpp">
+    <ClCompile Include="src\core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\matrix34.cpp">
+    <ClCompile Include="src\dof.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\tester.cpp">
+    <ClCompile Include="src\matrix34.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\vector3.cpp">
+    <ClCompile Include="src\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Model.cpp">
+    <ClCompile Include="src\OBJObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shader.cpp">
+    <ClCompile Include="src\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SpinningCube.cpp">
+    <ClCompile Include="src\Skeleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Tokenizer.cpp">
+    <ClCompile Include="src\skin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dof.cpp">
+    <ClCompile Include="src\SpinningCube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BallJoint.cpp">
+    <ClCompile Include="src\tester.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
+    <ClCompile Include="src\Tokenizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="skin.cpp">
+    <ClCompile Include="src\vector3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="..\dragon.skel">
+    <None Include="Model.glsl">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\EC.skel">
+    <None Include="dragon.skel">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\test.skel">
+    <None Include="EC.skel">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\wasp.skel">
+    <None Include="test.skel">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\Model.glsl">
+    <None Include="tube.skel">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\tube_smooth.skin">
+    <None Include="wasp.skel">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tube_smooth.skin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="wasp.skin">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

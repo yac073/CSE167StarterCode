@@ -1,7 +1,14 @@
 #include "skin.h"
 
-bool Skin::Load(Tokenizer & t)
+Skin::Skin(Skeleton* s)
 {
+	skel = s;
+}
+
+bool Skin::Load(const char *file)
+{
+	Tokenizer t;
+	t.Open(file);
 	while (1) {
 		char temp[256];
 		t.GetToken(temp);
@@ -44,6 +51,7 @@ bool Skin::Load(Tokenizer & t)
 		}
 		else if (strcmp(temp, "triangles") == 0) {
 			numTriangles = t.GetInt();
+			t.FindToken("{");
 			for (int i = 0; i < numTriangles; i++) {
 				vec3 triangle;
 				triangle.x = t.GetInt();
@@ -54,8 +62,11 @@ bool Skin::Load(Tokenizer & t)
 		}
 		else if (strcmp(temp, "bindings") == 0) {
 			numJoints = t.GetInt();
+			t.FindToken("{");
 			for (int x = 0; x < numJoints; x++) {
 				mat4x3 mat;
+				t.FindToken("matrix");
+				t.FindToken("{");
 				for (int i = 0; i < 4; i++) {
 					for (int j = 0; j < 3; j++) {
 						mat[i][j] = t.GetFloat();
@@ -63,7 +74,37 @@ bool Skin::Load(Tokenizer & t)
 				}
 				bindings.push_back(mat);
 			}
+			t.Close();
+			//itx part
+			for (int i = 0; i < numTriangles; i++) {
+				for (int j = 0; j < 3; j++) {
+					itx.push_back(triangles[i][j]);
+				}				
+			}
+			return true;
 		}
 		else t.SkipLine(); // Unrecognized token
 	}
+}
+
+void Skin::Update()
+{
+	vtx = vector<ModelVertex>();
+	for (int i = 0; i < numVerts; i++) {
+		int attachmentNum = skinWeights[i].size();
+		vec3 vPrime(0.0f);		
+		vec3 nPrime(0.0f);
+		for (int j = 0; j < attachmentNum; j++) {
+			vec3 vDelta = skinWeights[i][j].weight * (skel->joints[j]->worldTransform * skel->joints[j]->localTransform) * inverse(mat4(bindings[j])) * vec4(positions[i], 1.0f);
+			vec3 nDelta = skinWeights[i][j].weight * (skel->joints[j]->worldTransform * skel->joints[j]->localTransform) * inverse(mat4(bindings[j])) * vec4(normals[i], 0.0f);
+			vPrime += vDelta;
+			nPrime += nDelta;
+		}
+		vtx.push_back({ vPrime, normalize(nPrime) });
+	}
+}
+
+void Skin::Draw(const glm::mat4 & viewProjMtx, uint shader)
+{
+
 }

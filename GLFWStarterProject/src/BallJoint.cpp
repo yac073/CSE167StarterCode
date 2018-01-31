@@ -20,7 +20,7 @@ void BallJoint::Update()
 	}
 }
 
-bool BallJoint::Load(Tokenizer & t)
+bool BallJoint::Load(Tokenizer & t, std::vector<Joint*> * joints)
 {
 	t.FindToken("{");
 	while (1) {
@@ -63,7 +63,8 @@ bool BallJoint::Load(Tokenizer & t)
 		}
 		else if (strcmp(temp, "balljoint") == 0) {
 			BallJoint *j = new BallJoint();
-			j->Load(t);
+			joints->push_back(j);
+			j->Load(t, joints);
 			AddChild(j);
 		}
 		else if (strcmp(temp, "}") == 0) { 
@@ -96,4 +97,11 @@ void BallJoint::SetChildrenWorldTransform(glm::mat4 m)
 void BallJoint::SetParent(Joint * p)
 {
 	parent = p;
+}
+
+void BallJoint::ChangePose(float x, float y, float z)
+{
+	Pose.x += x;
+	Pose.y += y;
+	Pose.z += z;
 }

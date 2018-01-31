@@ -1,6 +1,6 @@
 #pragma once
 #include "Joint.h"
-#include "../Model.h"
+#include "Model.h"
 class BallJoint : public Joint {
 protected:
 	glm::vec3 Offset, Pose, BoxMin, BoxMax;	
@@ -22,9 +22,10 @@ public:
 	};
 	~BallJoint();
 	void Update();
-	bool Load(Tokenizer &t);
+	bool Load(Tokenizer &t, std::vector<Joint*> * joints);
 	void AddChild(Joint* j);
 	void Draw(const glm::mat4 &viewProjMtx, uint shader);
 	void SetChildrenWorldTransform(glm::mat4);
 	void SetParent(Joint *);
+	void ChangePose(float x, float y, float z);
 };

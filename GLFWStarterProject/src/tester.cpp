@@ -62,14 +62,20 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	glEnable(GL_CULL_FACE);
 
 	// Initialize components
-	Program=new ShaderProgram("../Model.glsl",ShaderProgram::eRender);
+	Program=new ShaderProgram("Model.glsl",ShaderProgram::eRender);
 	Cube=new SpinningCube;
 	Skel = new Skeleton;
-	auto fileName = "../test.skel";
+	auto fileName = "wasp.skel";
 	if (argc > 1) {
 		fileName = argv[1];
 	}
 	Skel->Load(fileName);
+	skin = new Skin(Skel);
+	fileName = "wasp.skin";
+	if (argc > 2) {
+		fileName = argv[2];
+	}
+	skin->Load(fileName);
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
 }
@@ -92,6 +98,7 @@ void Tester::Update() {
 	// Update the components in the world
 	//Cube->Update();
 	Skel->Update();
+	skin->Update();
 	Cam->Update();
 
 	// Tell glut to re-display the scene
@@ -151,8 +158,28 @@ void Tester::Keyboard(int key,int x,int y) {
 			Reset();
 			break;
 		case 'n':
+			Skel->LastJoint();
 			break;
 		case 'm':
+			Skel->NextJoint();
+			break;
+		case 'v':
+			Skel->ModJoint(0, 0, -0.1f);
+			break;
+		case 'b':
+			Skel->ModJoint(0, 0, 0.1f);
+			break;
+		case 'g':
+			Skel->ModJoint(0, -0.1f, 0);
+			break;
+		case 'h':
+			Skel->ModJoint(0, 0.1f, 0);
+			break;
+		case 't':
+			Skel->ModJoint(-0.1f, 0, 0);
+			break;
+		case 'y':
+			Skel->ModJoint(0.1f, 0, 0);
 			break;
 	}
 }
