@@ -182,7 +182,7 @@ void Channel::PreCompute()
 		auto key1 = keys[i + 1];
 		auto deltaT = key1->time - key0->time;
 		vec4 temp(key0->value, key1->value, 
-			key0->tangentOut * deltaT, key1->tangentIn * deltaT);
+			key0->tangentOut * deltaT, key1->tangentOut * deltaT);
 		vec4 abcd = (*cubicMat) * temp;
 		key0->A = abcd[0];
 		key0->B = abcd[1];

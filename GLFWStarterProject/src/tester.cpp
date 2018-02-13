@@ -105,7 +105,8 @@ Tester::~Tester() {
 void Tester::Update() {
 	// Update the components in the world
 	// += (1.0f / 30.0f)
-	Anim->Evaluate(startT += (1.0f / 30.0f));
+	Anim->Evaluate(startT);
+	startT += (1.0f / 30.0f);
 	Skel->Update();
 	skin->Update();
 	Cam->Update();
