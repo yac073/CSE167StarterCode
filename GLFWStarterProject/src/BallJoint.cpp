@@ -15,7 +15,7 @@ void BallJoint::Update()
 		glm::rotate(glm::mat4(1.0f), dofY.getValue(Pose.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
 		glm::rotate(glm::mat4(1.0f), dofX.getValue(Pose.x), glm::vec3(1.0f, 0.0f, 0.0f));	
 	for each(auto child in children) {
-		child->SetChildrenWorldTransform(worldTransform * localTransform);
+		child->SetWorldTransform(worldTransform * localTransform);
 		child->Update();
 	}
 }
@@ -101,7 +101,7 @@ void BallJoint::Draw(const glm::mat4 &viewProjMtx, uint shader)
 	}
 }
 
-void BallJoint::SetChildrenWorldTransform(glm::mat4 m)
+void BallJoint::SetWorldTransform(glm::mat4 m)
 {
 	worldTransform = glm::mat4(m);
 }
@@ -116,4 +116,11 @@ void BallJoint::ChangePose(float x, float y, float z)
 	Pose.x += x;
 	Pose.y += y;
 	Pose.z += z;
+}
+
+void BallJoint::SetPose(glm::vec3 xyz)
+{
+	Pose.x = xyz.x;
+	Pose.y = xyz.y;
+	Pose.z = xyz.z;
 }

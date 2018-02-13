@@ -22,6 +22,14 @@ bool Skeleton::Load(const char * file)
 
 void Skeleton::Update()
 {
+	if (anim != nullptr) {		
+		base->SetWorldTransform(glm::translate(glm::mat4(1.0f), anim->Result[0]));
+		cout << "x: " << anim->Result[0].x << " y: " << anim->Result[0].y
+			<< " z: " << anim->Result[0].z << endl;
+		for (int i = 0; i < anim->Result.size() - 1; i++) {
+			((BallJoint*)joints[i])->SetPose(anim->Result[i + 1]);
+		}
+	}
 	base->Update();
 }
 

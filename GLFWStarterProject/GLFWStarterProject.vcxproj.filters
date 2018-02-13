@@ -66,6 +66,12 @@
     <ClInclude Include="src\bmpLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Key.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BallJoint.cpp">
@@ -116,6 +122,15 @@
     <ClCompile Include="src\bmpLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Channel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -142,6 +157,9 @@
     </None>
     <None Include="wasp.skin">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\Channel.h">
+      <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
 </Project>

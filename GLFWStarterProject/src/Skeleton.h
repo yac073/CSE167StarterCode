@@ -2,12 +2,14 @@
 #include "core.h"
 #include <iostream>
 #include "BallJoint.h"
+#include "Animation.h"
 class Skeleton {
 private:
 	BallJoint* base;	
 	int index;
 public:
 	std::vector<Joint *> joints;
+	Animation* anim;
 	BallJoint* activeJoint;
 	Skeleton();
 	bool Load(const char *file);

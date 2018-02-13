@@ -65,6 +65,7 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	Program=new ShaderProgram("Model.glsl",ShaderProgram::eRender);
 	Cube=new SpinningCube;
 	Skel = new Skeleton;
+	Anim = new Animation();
 	auto fileName = "wasp.skel";
 	if (argc > 1) {
 		fileName = argv[1];
@@ -77,9 +78,11 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	}
 	skin->Load(fileName);
 	if (argc > 3) {
-		skin->LoadMorph(0, argv[3]);
-		skin->LoadMorph(1, argv[4]);
+		fileName = argv[3];
 	}
+	Anim->Load(fileName);
+	startT = 0;
+	Skel->anim = Anim;
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
 }
@@ -91,6 +94,7 @@ Tester::~Tester() {
 	delete Cube;
 	delete Skel;
 	delete Cam;
+	delete Anim;
 
 	glFinish();
 	glutDestroyWindow(WindowHandle);
@@ -100,11 +104,11 @@ Tester::~Tester() {
 
 void Tester::Update() {
 	// Update the components in the world
-	//Cube->Update();
+	// += (1.0f / 30.0f)
+	Anim->Evaluate(startT += (1.0f / 30.0f));
 	Skel->Update();
 	skin->Update();
 	Cam->Update();
-
 	// Tell glut to re-display the scene
 	glutSetWindow(WindowHandle);
 	glutPostRedisplay();

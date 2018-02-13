@@ -191,8 +191,9 @@ void Skin::Update()
 		}
 		for (int j = 0; j < attachmentNum; j++) {
 			int jointID = skinWeights[i][j].joint;
-			vec3 vDelta = skinWeights[i][j].weight * (skel->joints[jointID]->worldTransform * skel->joints[jointID]->localTransform) * inverse(mat4(bindings[jointID])) * vec4(pos, 1.0f);
-			vec3 nDelta = skinWeights[i][j].weight * (skel->joints[jointID]->worldTransform * skel->joints[jointID]->localTransform) * inverse(mat4(bindings[jointID])) * vec4(nom, 0.0f);
+			auto transform = skinWeights[i][j].weight * (skel->joints[jointID]->worldTransform * skel->joints[jointID]->localTransform) * inverse(mat4(bindings[jointID]));
+			vec3 vDelta = transform * vec4(pos, 1.0f);
+			vec3 nDelta = transform * vec4(nom, 0.0f);
 			vPrime += vDelta;
 			nPrime += nDelta;
 

@@ -15,6 +15,6 @@ public:
 	virtual bool Load(Tokenizer &, vector<Joint*> *) = 0;
 	virtual void AddChild(Joint *) = 0;
 	virtual void Draw(const glm::mat4 &viewProjMtx, uint shader) = 0;
-	virtual void SetChildrenWorldTransform(glm::mat4) = 0;
+	virtual void SetWorldTransform(glm::mat4) = 0;
 	virtual void SetParent(Joint*) = 0;
 };
