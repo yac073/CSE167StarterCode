@@ -163,6 +163,7 @@ bool Skin::LoadMorph(int n, const char * file)
 				morph[n][i].normal.y = t.GetFloat() - normals[morph[n][i].index].y;
 				morph[n][i].normal.z = t.GetFloat() - normals[morph[n][i].index].z;
 			}
+			t.Close();
 			return true;
 		}		
 		else t.SkipLine(); // Unrecognized token
@@ -185,7 +186,7 @@ void Skin::Update()
 			}
 			if (m2[i] != -1) {
 				pos += morph[1][m2[i]].position * (tick2 / 60.0f);
-				//nom += morph[1][m2[i]].normal * (tick2 / 60.0f);
+				nom += morph[1][m2[i]].normal * (tick2 / 60.0f);
 			}
 		}
 		for (int j = 0; j < attachmentNum; j++) {

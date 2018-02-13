@@ -7,6 +7,7 @@ using namespace std;
 class Joint {
 public:
 	glm::mat4 localTransform, worldTransform;
+	char name[1024];
 	Dof dofX, dofY, dofZ;
 	Joint * parent;
 	vector<Joint *> children;

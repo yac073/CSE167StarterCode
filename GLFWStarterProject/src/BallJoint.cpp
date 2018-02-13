@@ -22,6 +22,18 @@ void BallJoint::Update()
 
 bool BallJoint::Load(Tokenizer & t, std::vector<Joint*> * joints)
 {
+	char c = t.GetChar();
+	while (c == ' ' || c < 0) { c = t.GetChar(); }
+	char s[1024]; int i = 0;
+	while (c != ' ') {
+		s[i] = c;
+		i++;
+		c = t.GetChar();
+	}
+	s[i] = '\0';
+	for (int j = 0; j < i + 1; j++) {
+		name[j] = s[j];
+	}
 	t.FindToken("{");
 	while (1) {
 		char temp[256];

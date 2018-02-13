@@ -34,7 +34,8 @@ void Skeleton::NextJoint()
 {
 	index++;
 	index %= joints.size();
-	activeJoint = (BallJoint*) joints[index];
+	activeJoint = (BallJoint*)joints[index];
+	cout << activeJoint->name << endl;
 }
 
 void Skeleton::LastJoint()
@@ -42,6 +43,7 @@ void Skeleton::LastJoint()
 	index += joints.size() - 1;
 	index %= joints.size();
 	activeJoint = (BallJoint*)joints[index];
+	cout << activeJoint->name << endl;
 }
 
 void Skeleton::ModJoint(float x, float y, float z)

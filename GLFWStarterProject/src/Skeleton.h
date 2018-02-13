@@ -1,5 +1,6 @@
 #pragma once
 #include "core.h"
+#include <iostream>
 #include "BallJoint.h"
 class Skeleton {
 private:
