@@ -81,7 +81,7 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 		fileName = argv[3];
 	}
 	Anim->Load(fileName);
-	startT = 0;
+	startT = -10;
 	Skel->anim = Anim;
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
