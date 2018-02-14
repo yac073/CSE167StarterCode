@@ -19,7 +19,7 @@ private:
 	Key** keys;
 	Key* nextKey(int);
 	Key* lastKey(int);
-	Key* bSearch(float, int, int);
+	int bSearch(float, int, int);
 	mat4 * cubicMat;
 	float timeSpan;
 	float inverseTimeSpan;
@@ -27,6 +27,9 @@ private:
 public:
 	Channel(mat4 *);
 	~Channel();
+	float* points;
+	vector<vec4> tanPT;
+	float minPT, maxPT;
 	bool Load(Tokenizer * t);
 	void PreCompute();
 	float Evaluate(float time);

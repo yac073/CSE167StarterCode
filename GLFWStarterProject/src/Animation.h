@@ -5,12 +5,12 @@
 #include "Channel.h"
 using namespace std;
 using namespace glm;
+struct JointChannel {
+	Channel* xChannel;
+	Channel* yChannel;
+	Channel* zChannel;
+};
 class Animation {
-	struct JointChannel {
-		Channel* xChannel;
-		Channel* yChannel;
-		Channel* zChannel;
-	};
 private:
 	float startTime, endTime;
 	int numOfChannels;
@@ -22,4 +22,5 @@ public:
 	~Animation();
 	bool Load(const char*file);
 	void Evaluate(float time);
+	JointChannel* getChannels(int);
 };

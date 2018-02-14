@@ -10,15 +10,15 @@ Key* Channel::lastKey(int now)
 	return keys[(now + numKeys - 1) % numKeys];
 }
 
-Key * Channel::bSearch(float time, int min, int max)
+int Channel::bSearch(float time, int min, int max)
 {
 	int middle = (min + max) / 2;
 	if (min == middle) {
 		if (time == keys[max]->time) {
-			return keys[max];
+			return max;
 		}
 		else {
-			return keys[min];
+			return min;
 		}
 	}
 	if (time > keys[middle]->time) {
@@ -32,6 +32,7 @@ Key * Channel::bSearch(float time, int min, int max)
 Channel::Channel(mat4* m)
 {
 	cubicMat = m;
+	tanPT = vector<vec4>();
 }
 
 Channel::~Channel()
@@ -40,6 +41,7 @@ Channel::~Channel()
 		delete(keys[i]);
 	}
 	delete(keys);
+	delete(points);
 }
 
 bool Channel::Load(Tokenizer * t)
@@ -183,7 +185,7 @@ void Channel::PreCompute()
 		auto deltaT = key1->time - key0->time;
 		vec4 temp(key0->value, key1->value, 
 			key0->tangentOut * deltaT, key1->tangentOut * deltaT);
-		vec4 abcd = (*cubicMat) * temp;
+		vec4 abcd = (*cubicMat) * temp;		
 		key0->A = abcd[0];
 		key0->B = abcd[1];
 		key0->C = abcd[2];
@@ -192,8 +194,30 @@ void Channel::PreCompute()
 	auto fK = keys[0]; 
 	auto lK = lastKey(0);
 	timeSpan = lK->time - fK->time;
-	inverseTimeSpan = 1 / timeSpan;
+	inverseTimeSpan = 1.0f / timeSpan;
 	bigDeltaV = lK->value - fK->value;
+	points = new float[800]; 
+	int i = 0; 
+	minPT = std::numeric_limits<float>().infinity();
+	maxPT = std::numeric_limits<float>().min();
+	for (float j = -4; j < 4; j += 0.01) {		
+		points[i] = Evaluate(j);
+		if (points[i] > maxPT) {
+			maxPT = points[i];
+		}
+		if (points[i] < minPT) {
+			minPT = points[i];
+		}
+		i++; 
+		if (i == 800) {
+			j = 5;
+		}
+	}	
+	for (i = 0; i < numKeys; i++) {
+		auto pos = keys[i]->value;
+		auto tan = keys[i]->tangentIn;
+		tanPT.push_back(vec4(keys[i]->time, pos, tan, timeSpan));
+	}
 }
 
 float Channel::Evaluate(float time)
@@ -263,12 +287,14 @@ float Channel::Evaluate(float time)
 	if (numKeys == 1) {
 		return keys[0]->value;
 	}
-	auto key = bSearch(time, 0, numKeys - 1);
-	if (time == key->time) {
-		return key->value;
+	auto index = bSearch(time, 0, numKeys - 1);
+	if (time == keys[index]->time) {
+		return keys[index]->value;
 	}
 	else {
-		float u = (time - keys[0]->time) * inverseTimeSpan;
-		return key->A * u * u * u + key->B * u * u + key->C * u + key->D;
+		float u = (time - keys[index]->time) / (nextKey(index)->time - keys[index]->time);
+		return keys[index]->A * u * u * u + 
+				keys[index]->B * u * u + 
+				keys[index]->C * u + keys[index]->D;
 	}
 }

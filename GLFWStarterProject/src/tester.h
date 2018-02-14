@@ -44,7 +44,7 @@ private:
 	int MouseX,MouseY;
 
 	// Components
-	ShaderProgram *Program;
+	ShaderProgram *DefaultShader, *CurveShader;
 	SpinningCube *Cube;
 	Skeleton * Skel;
 	Camera *Cam;

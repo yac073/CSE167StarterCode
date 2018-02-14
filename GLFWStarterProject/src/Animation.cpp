@@ -82,3 +82,8 @@ void Animation::Evaluate(float time)
 		Result.push_back(vec3(xval,yval,zval));
 	}
 }
+
+JointChannel * Animation::getChannels(int index)
+{
+	return channels[index];
+}

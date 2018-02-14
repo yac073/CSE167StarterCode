@@ -31,8 +31,8 @@ static void mousemotion(int x, int y)					{TESTER->MouseMotion(x,y);}
 ////////////////////////////////////////////////////////////////////////////////
 
 Tester::Tester(const char *windowTitle,int argc,char **argv) {
-	WinX=800;
-	WinY=600;
+	WinX=1280;
+	WinY=720;
 	LeftDown=MiddleDown=RightDown=false;
 	MouseX=MouseY=0;
 
@@ -62,27 +62,24 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	glEnable(GL_CULL_FACE);
 
 	// Initialize components
-	Program=new ShaderProgram("Model.glsl",ShaderProgram::eRender);
+	DefaultShader=new ShaderProgram("Model.glsl",ShaderProgram::eRender);
+	CurveShader = new ShaderProgram("curveshader.glsl", ShaderProgram::eRender);
 	Cube=new SpinningCube;
 	Skel = new Skeleton;
-	Anim = new Animation();
-	auto fileName = "wasp.skel";
-	if (argc > 1) {
-		fileName = argv[1];
-	}
-	Skel->Load(fileName);
-	skin = new Skin(Skel, argc > 3);
-	fileName = "wasp.skin";
-	if (argc > 2) {
-		fileName = argv[2];
-	}
-	skin->Load(fileName);
-	if (argc > 3) {
-		fileName = argv[3];
-	}
+	Anim = new Animation;
+	//load anim
+	auto fileName = argv[3];
 	Anim->Load(fileName);
-	startT = -10;
+
+	//load skel
+	fileName = argv[1];
 	Skel->anim = Anim;
+	Skel->Load(fileName);
+	//load skin
+	skin = new Skin(Skel, false);	
+	fileName = argv[2];
+	skin->Load(fileName);
+	startT = 0;
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));
 }
@@ -90,7 +87,8 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 ////////////////////////////////////////////////////////////////////////////////
 
 Tester::~Tester() {
-	delete Program;
+	delete DefaultShader;
+	delete CurveShader;
 	delete Cube;
 	delete Skel;
 	delete Cam;
@@ -106,7 +104,7 @@ void Tester::Update() {
 	// Update the components in the world
 	// += (1.0f / 30.0f)
 	Anim->Evaluate(startT);
-	startT += (1.0f / 30.0f);
+	startT += (1.0f / 60.0f);
 	Skel->Update();
 	skin->Update();
 	Cam->Update();
@@ -134,8 +132,10 @@ void Tester::Draw() {
 
 	// Draw components
 	//Cube->Draw(Cam->GetViewProjectMtx(),Program->GetProgramID());
-	//Skel->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
-	skin->Draw(Cam->GetViewProjectMtx(), Program->GetProgramID());
+	skin->Draw(Cam->GetViewProjectMtx(), DefaultShader->GetProgramID());
+	Skel->DrawCurve(Cam->GetViewProjectMtx(), CurveShader->GetProgramID());
+
+
 	// Finish drawing scene
 	glFinish();
 	glutSwapBuffers();

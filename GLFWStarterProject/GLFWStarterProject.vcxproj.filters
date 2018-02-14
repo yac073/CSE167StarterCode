@@ -72,6 +72,9 @@
     <ClInclude Include="src\Key.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Curve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BallJoint.cpp">
@@ -129,6 +132,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Curve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

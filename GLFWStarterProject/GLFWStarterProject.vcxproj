@@ -24,6 +24,7 @@
     <ClInclude Include="src\bmpLoader.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\core.h" />
+    <ClInclude Include="src\Curve.h" />
     <ClInclude Include="src\dof.h" />
     <ClInclude Include="src\Joint.h" />
     <ClInclude Include="src\Key.h" />
@@ -46,6 +47,7 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Channel.cpp" />
     <ClCompile Include="src\core.cpp" />
+    <ClCompile Include="src\Curve.cpp" />
     <ClCompile Include="src\dof.cpp" />
     <ClCompile Include="src\Key.cpp" />
     <ClCompile Include="src\matrix34.cpp" />
@@ -75,7 +77,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EBF1E546-3F93-49DB-BD9A-B629C3C6DCB0}</ProjectGuid>
     <RootNamespace>GLFWStarterProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
