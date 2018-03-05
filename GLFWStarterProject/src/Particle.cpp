@@ -24,7 +24,7 @@ void Particle::Update(float deltaTime)
 	Velocity += deltaTime * (Force / Mass);
 	Position += deltaTime * Velocity;
 	Force = vec3(0.0f);
-	if(Position.y < -50.f)
+	if(Position.y < -25.f)
 	{
 		Position.y = 2 * -25.f - Position.y;
 		Velocity.y = -.5f * Velocity.y;
@@ -57,9 +57,5 @@ void Particle::Draw(const glm::mat4 & viewProjMtx, uint shader)
 
 void Particle::ApplyForce(vec3 & f)
 {
-	if (isnan(f.x) || isnan(f.y) || isnan(f.z)) {
-		//break you mother fucker
-		int i = 0;
-	}
 	Force += f;
 }

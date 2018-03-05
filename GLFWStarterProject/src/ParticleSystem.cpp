@@ -1,5 +1,19 @@
 #include "ParticleSystem.h"
 
+void ParticleSystem::Move(bool isLeft, vec3 dir)
+{
+	int ppr = sqrt(NumParticles);
+	for (int i = 0; i < ppr; i++) {
+		float j = i;
+		if (isLeft) {
+			P[i * ppr]->Position += (dir * .1f * (1 - j / (ppr - 1)));
+		}
+		else {
+			P[i * ppr]->Position += (dir * .1f * (j / (ppr - 1)));
+		}
+	}
+}
+
 ParticleSystem::ParticleSystem(int i)
 {
 	NumParticles = i;
@@ -154,5 +168,35 @@ void ParticleSystem::Draw(bool debug, const glm::mat4 & viewProjMtx, uint shader
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glUseProgram(0);
+}
+
+void ParticleSystem::MoveLeft(bool isLeft)
+{
+	Move(isLeft, vec3(-1.f, .0f, .0f));
+}
+
+void ParticleSystem::MoveRight(bool isLeft)
+{
+	Move(isLeft, vec3(1.f, .0f, .0f));
+}
+
+void ParticleSystem::MoveTop(bool isLeft)
+{
+	Move(isLeft, vec3(.0f, 1.0f, .0f));
+}
+
+void ParticleSystem::MoveDown(bool isLeft)
+{
+	Move(isLeft, vec3(.0f, -1.0f, .0f));
+}
+
+void ParticleSystem::MoveNear(bool isLeft)
+{
+	Move(isLeft, vec3(0.f, .0f, 1.0f));
+}
+
+void ParticleSystem::MoveFar(bool isLeft)
+{
+	Move(isLeft, vec3(0.f, .0f, -1.0f));
 }
 

@@ -18,14 +18,13 @@ void AerodynamicForce::ComputeForce(vec3 Va)
 	vec3 l2 = (P3->Position - P1->Position);
 	if (abs(l2.x) == 0 && abs(l2.y) == 0 && abs(l2.z) == 0) {
 		return;
-	}
+	}	
 	vec3 n = cross(l1, l2);
 	if (l1 == l2) {
 		return;
 	}
 	n = normalize(n);
-	float a0 = 0.5f * length(P2->Position - P1->Position) * 
-		length(P3->Position - P1->Position);
+	float a0 = 0.5f * length(cross(l1, l2));
 	float a = a0 * dot(v, n) / length(v);
 	vec3 aero = -0.5f * p * length(v) * length(v) * Cd * a * n;
 	P1->ApplyForce(aero / 3.f);

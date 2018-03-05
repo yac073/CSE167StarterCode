@@ -66,8 +66,7 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 
 	// Initialize GLEW
 	glewInit();
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);	
 
 	// Initialize components
 	DefaultShader=new ShaderProgram("Model.glsl",ShaderProgram::eRender);
@@ -79,7 +78,7 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	particleSystem = new ParticleSystem(numOfParticlesPerRow *numOfParticlesPerRow);
 	for (int i = 0; i < numOfParticlesPerRow; i++) {
 		for (int j = 0; j < numOfParticlesPerRow; j++) {
-			particleSystem->AddParticle(new Particle(.1f, vec3(i * .5f, -10.0,-50.f + j * .5f)));
+			particleSystem->AddParticle(new Particle(.1f, vec3(.5f * i - 12.5f, -10.0f,-25.f + j * .5f)));
 		}
 	}
 	particleSystem->BuildStructure();
@@ -202,6 +201,8 @@ void Tester::SpecialInput(int key, int x, int y)
 	}
 }
 
+bool isLeft = true;
+
 ////////////////////////////////////////////////////////////////////////////////
 void Tester::Keyboard(int key,int x,int y) {
 	switch(key) {
@@ -211,7 +212,35 @@ void Tester::Keyboard(int key,int x,int y) {
 		case 'r':
 			Reset();
 			break;
-		
+		case '=':
+			windDir *= 1.2f;
+			cout << "windDir" << windDir.x << " " << windDir.y << " " << windDir.z << endl;
+			break;
+		case '-':
+			windDir /= 1.2f;
+			cout << "windDir" << windDir.x << " " << windDir.y << " " << windDir.z << endl;
+			break;
+		case '`':
+			isLeft = !isLeft;
+			break;
+		case 'f':
+			particleSystem->MoveLeft(isLeft);
+			break;
+		case 'h':
+			particleSystem->MoveRight(isLeft);
+			break;
+		case 't':
+			particleSystem->MoveTop(isLeft);
+			break;
+		case 'b':
+			particleSystem->MoveDown(isLeft);
+			break;
+		case 'y':
+			particleSystem->MoveFar(isLeft);
+			break;
+		case 'v':
+			particleSystem->MoveNear(isLeft);
+			break;
 	}
 }
 

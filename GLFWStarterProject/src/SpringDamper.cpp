@@ -16,9 +16,9 @@ void SpringDamper::ComputeForce()
 		return;
 	}
 	vec3 e = normalize(l);
-	float sf = (-1.f * SpringConstant) *
+	float sf = -SpringConstant *
 		(RestLength - length(P2->Position - P1->Position));
-	float df = (-1.f * DampingFactor) * (dot(P1->Velocity, e) - dot(P2->Velocity, e));
+	float df = -DampingFactor * (dot(P1->Velocity, e) - dot(P2->Velocity, e));
 	vec3 f = (sf + df) * e;
 	P1->ApplyForce(f);
 	P2->ApplyForce(-f);

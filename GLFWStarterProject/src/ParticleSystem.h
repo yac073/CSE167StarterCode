@@ -14,7 +14,7 @@ class ParticleSystem {
 	vector<ModelVertex> Vertices;	
 	vector<uint> Indices;
 	uint VertexBuffer, IndexBuffer;
-
+	void Move(bool, vec3);
 public:
 	ParticleSystem(int);
 	~ParticleSystem();
@@ -22,4 +22,10 @@ public:
 	void BuildStructure();
 	void Update(float deltaTime, vec3);
 	void Draw(bool, const glm::mat4 &viewProjMtx, uint shader);
+	void MoveLeft(bool);
+	void MoveRight(bool);
+	void MoveTop(bool);
+	void MoveDown(bool);
+	void MoveNear(bool);
+	void MoveFar(bool);
 };
