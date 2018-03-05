@@ -75,6 +75,18 @@
     <ClInclude Include="src\Curve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpringDamper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AerodynamicForce.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BallJoint.cpp">
@@ -137,6 +149,18 @@
     <ClCompile Include="src\Curve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpringDamper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AerodynamicForce.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -166,6 +190,12 @@
     </None>
     <None Include="src\Channel.h">
       <Filter>Header Files</Filter>
+    </None>
+    <None Include="curveshader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Point.glsl">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

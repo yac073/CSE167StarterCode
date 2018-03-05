@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AerodynamicForce.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\BallJoint.h" />
     <ClInclude Include="src\bmpLoader.h" />
@@ -31,16 +32,20 @@
     <ClInclude Include="src\matrix34.h" />
     <ClInclude Include="src\Model.h" />
     <ClInclude Include="src\OBJObject.h" />
+    <ClInclude Include="src\Particle.h" />
+    <ClInclude Include="src\ParticleSystem.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\Skeleton.h" />
     <ClInclude Include="src\skin.h" />
     <ClInclude Include="src\SkinDrawer.h" />
     <ClInclude Include="src\SpinningCube.h" />
+    <ClInclude Include="src\SpringDamper.h" />
     <ClInclude Include="src\tester.h" />
     <ClInclude Include="src\Tokenizer.h" />
     <ClInclude Include="src\vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AerodynamicForce.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\BallJoint.cpp" />
     <ClCompile Include="src\bmpLoader.cpp" />
@@ -53,20 +58,25 @@
     <ClCompile Include="src\matrix34.cpp" />
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\OBJObject.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
+    <ClCompile Include="src\ParticleSystem.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Skeleton.cpp" />
     <ClCompile Include="src\skin.cpp" />
     <ClCompile Include="src\SkinDrawer.cpp" />
     <ClCompile Include="src\SpinningCube.cpp" />
+    <ClCompile Include="src\SpringDamper.cpp" />
     <ClCompile Include="src\tester.cpp" />
     <ClCompile Include="src\Tokenizer.cpp" />
     <ClCompile Include="src\vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="curveshader.glsl" />
     <None Include="dragon.skel" />
     <None Include="EC.skel" />
     <None Include="Model.glsl" />
     <None Include="packages.config" />
+    <None Include="Point.glsl" />
     <None Include="src\Channel.h" />
     <None Include="test.skel" />
     <None Include="tube.skel" />
