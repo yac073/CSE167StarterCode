@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
 	glutMainLoop();
 	delete TESTER;
 
-	return 0;
+	return 0; 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
