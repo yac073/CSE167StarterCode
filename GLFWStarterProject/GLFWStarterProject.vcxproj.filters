@@ -209,5 +209,8 @@
     <None Include="Rope.glsl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Snake.skel">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

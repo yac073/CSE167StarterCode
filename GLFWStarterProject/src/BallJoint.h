@@ -1,6 +1,7 @@
 #pragma once
 #include "Joint.h"
 #include "Model.h"
+using namespace glm;
 class BallJoint : public Joint {
 protected:
 	glm::vec3 Offset, Pose, BoxMin, BoxMax;	
@@ -29,5 +30,7 @@ public:
 	void SetParent(Joint *);
 	void ChangePose(float x, float y, float z);
 	void SetPose(glm::vec3);
-
+	vec3 GetPose();
+	vec3 GetPosition();
+	vec3 GetEndPosition();
 };

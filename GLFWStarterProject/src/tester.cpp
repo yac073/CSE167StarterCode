@@ -87,16 +87,16 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	particleSystem->BuildStructure();
 	//load anim
 	auto fileName = argv[3];
-	Anim->Load(fileName);
+	//Anim->Load(fileName);
 
 	//load skel
 	fileName = argv[1];
-	Skel->anim = Anim;
-	Skel->Load(fileName);
+	//Skel->anim = Anim;
+	Skel->Load("Snake.skel");
 	//load skin
-	skin = new Skin(Skel, false);	
+	//skin = new Skin(Skel, false);	
 	fileName = argv[2];
-	skin->Load(fileName);
+	//skin->Load(fileName);
 	startT = glutGet(GLUT_ELAPSED_TIME);
 	Cam=new Camera;
 	Cam->SetAspect(float(WinX)/float(WinY));	
@@ -124,11 +124,11 @@ Tester::~Tester() {
 
 void Tester::Update() {
 	// Update the components in the world
-	// += (1.0f / 30.0f)
 	nowT = glutGet(GLUT_ELAPSED_TIME);
 	//Anim->Evaluate(startT / 1000.0f);
-	particleSystem->Update((nowT - startT) / 1000.0f, windDir);
-	//Skel->Update();
+	//particleSystem->Update((nowT - startT) / 1000.0f, windDir);
+	Skel->Update(Cube->GetPosition());
+	Cube->Update();
 	//skin->Update();
 	Cam->Update();
 	// Tell glut to re-display the scene
@@ -155,10 +155,11 @@ void Tester::Draw() {
 	glClearColor(0., 0., 0., 1.);
 
 	// Draw components
-	//Cube->Draw(Cam->GetViewProjectMtx(),Program->GetProgramID());
+	Cube->Draw(Cam->GetViewProjectMtx(), DefaultShader->GetProgramID());
 	//skin->Draw(Cam->GetViewProjectMtx(), DefaultShader->GetProgramID());
+	Skel->Draw(Cam->GetViewProjectMtx(), DefaultShader->GetProgramID());
 	//Skel->DrawCurve(Cam->GetViewProjectMtx(), CurveShader->GetProgramID());
-	particleSystem->Draw(DEBUG, Cam->GetViewProjectMtx(), DefaultShader->GetProgramID(), RopeShader->GetProgramID());
+	//particleSystem->Draw(DEBUG, Cam->GetViewProjectMtx(), DefaultShader->GetProgramID(), RopeShader->GetProgramID());
 
 	// Finish drawing scene
 	glFinish();
@@ -229,22 +230,22 @@ void Tester::Keyboard(int key,int x,int y) {
 			isLeft = !isLeft;
 			break;
 		case 'f':
-			particleSystem->MoveLeft(isLeft);
+			Cube->MoveLeft(isLeft);
 			break;
 		case 'h':
-			particleSystem->MoveRight(isLeft);
+			Cube->MoveRight(isLeft);
 			break;
 		case 't':
-			particleSystem->MoveTop(isLeft);
+			Cube->MoveTop(isLeft);
 			break;
 		case 'b':
-			particleSystem->MoveDown(isLeft);
+			Cube->MoveDown(isLeft);
 			break;
 		case 'y':
-			particleSystem->MoveFar(isLeft);
+			Cube->MoveFar(isLeft);
 			break;
 		case 'v':
-			particleSystem->MoveNear(isLeft);
+			Cube->MoveNear(isLeft);
 			break;
 	}
 }

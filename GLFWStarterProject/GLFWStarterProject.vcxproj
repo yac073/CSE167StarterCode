@@ -81,6 +81,7 @@
     <None Include="packages.config" />
     <None Include="Point.glsl" />
     <None Include="Rope.glsl" />
+    <None Include="Snake.skel" />
     <None Include="src\Channel.h" />
     <None Include="test.skel" />
     <None Include="tube.skel" />
@@ -91,7 +92,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EBF1E546-3F93-49DB-BD9A-B629C3C6DCB0}</ProjectGuid>
     <RootNamespace>GLFWStarterProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -124,3 +124,19 @@ void BallJoint::SetPose(glm::vec3 xyz)
 	Pose.y = xyz.y;
 	Pose.z = xyz.z;
 }
+
+vec3 BallJoint::GetPose()
+{
+	return Pose;
+}
+
+vec3 BallJoint::GetPosition() {
+	return  (worldTransform * localTransform)[3];
+}
+
+vec3 BallJoint::GetEndPosition() {
+	auto pos = vec3(GetPosition());
+	pos.y += BoxMax.y / 2;
+	return pos;
+}
+

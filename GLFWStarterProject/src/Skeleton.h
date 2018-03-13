@@ -16,7 +16,7 @@ public:
 	Skeleton();
 	~Skeleton();
 	bool Load(const char *file);
-	void Update();
+	void Update(vec3);
 	void Draw(const glm::mat4 &viewProjMtx, uint shader);
 	void DrawCurve(const glm::mat4 &viewProjMtx, uint shader);
 	void NextJoint();

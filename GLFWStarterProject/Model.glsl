@@ -40,8 +40,8 @@ in vec2 texCoord;
 
 uniform vec4 AmbientColor=vec4(0.1);
 uniform vec3 LightDirection1=normalize(vec3(-1,-1,-1));
-uniform vec3 LightColor1=vec3(1,0,0);
-uniform vec4 DiffuseColor=vec4(1,0.5,0.5,1);
+uniform vec3 LightColor1=vec3(1,1,1);
+uniform vec4 DiffuseColor=vec4(1,1,1,1);
 uniform sampler2D tex;
 uniform int hasTex;
 

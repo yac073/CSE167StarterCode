@@ -4,6 +4,7 @@
 #include "Tokenizer.h"
 #include <vector>
 using namespace std;
+using namespace glm;
 class Joint {
 public:
 	glm::mat4 localTransform, worldTransform;
@@ -17,4 +18,8 @@ public:
 	virtual void Draw(const glm::mat4 &viewProjMtx, uint shader) = 0;
 	virtual void SetWorldTransform(glm::mat4) = 0;
 	virtual void SetParent(Joint*) = 0;
+	virtual void SetPose(glm::vec3 xyz) = 0;
+	virtual vec3 GetPose() = 0;
+	virtual vec3 GetPosition() = 0;
+	virtual vec3 GetEndPosition() = 0;
 };
