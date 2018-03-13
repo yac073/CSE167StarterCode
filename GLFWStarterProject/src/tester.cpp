@@ -72,13 +72,16 @@ Tester::Tester(const char *windowTitle,int argc,char **argv) {
 	DefaultShader=new ShaderProgram("Model.glsl",ShaderProgram::eRender);
 	PointShader = new ShaderProgram("Point.glsl", ShaderProgram::eRender);
 	CurveShader = new ShaderProgram("curveshader.glsl", ShaderProgram::eRender);
+	RopeShader = new ShaderProgram("Rope.glsl", ShaderProgram::eRender);
+	BoxShader = new ShaderProgram("Box.glsl", ShaderProgram::eRender);
 	Cube=new SpinningCube;
 	Skel = new Skeleton;
 	Anim = new Animation;
 	particleSystem = new ParticleSystem(numOfParticlesPerRow *numOfParticlesPerRow);
+	particleSystem->isEC = DEBUG;
 	for (int i = 0; i < numOfParticlesPerRow; i++) {
 		for (int j = 0; j < numOfParticlesPerRow; j++) {
-			particleSystem->AddParticle(new Particle(.1f, vec3(.5f * i - 12.5f, -10.0f,-25.f + j * .5f)));
+			particleSystem->AddParticle(new Particle(10.f, vec3(.5f * i - 12.5f, DEBUG? 100.f : 10.0f ,-100.f + j * .5f)));
 		}
 	}
 	particleSystem->BuildStructure();
@@ -105,6 +108,8 @@ Tester::~Tester() {
 	delete DefaultShader;
 	delete CurveShader;	
 	delete PointShader;
+	delete RopeShader;
+	delete BoxShader;
 	delete particleSystem;
 	delete Cube;
 	delete Skel;
@@ -153,7 +158,7 @@ void Tester::Draw() {
 	//Cube->Draw(Cam->GetViewProjectMtx(),Program->GetProgramID());
 	//skin->Draw(Cam->GetViewProjectMtx(), DefaultShader->GetProgramID());
 	//Skel->DrawCurve(Cam->GetViewProjectMtx(), CurveShader->GetProgramID());
-	particleSystem->Draw(DEBUG, Cam->GetViewProjectMtx(), DefaultShader->GetProgramID());
+	particleSystem->Draw(DEBUG, Cam->GetViewProjectMtx(), DefaultShader->GetProgramID(), RopeShader->GetProgramID());
 
 	// Finish drawing scene
 	glFinish();

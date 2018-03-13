@@ -3,10 +3,10 @@
 #include "Particle.h"
 using namespace glm;
 class SpringDamper {
-	float SpringConstant, DampingFactor;
 	float RestLength;
 	Particle *P1, *P2;
 public:
-	SpringDamper(Particle*, Particle*, float);
+	float SpringConstant, DampingFactor;
+	SpringDamper(Particle*, Particle*, float rl = 0.5f);
 	void ComputeForce();
 };

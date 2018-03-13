@@ -16,9 +16,13 @@ void ParticleSystem::Move(bool isLeft, vec3 dir)
 
 ParticleSystem::ParticleSystem(int i)
 {
+	isEC = true;
 	NumParticles = i;
 	P = vector<Particle*>();
 	Vertices = vector<ModelVertex>();
+	Sd = vector<SpringDamper*>();
+	Af = vector<AerodynamicForce*>();
+	Ropes = vector<RopeSystem*>();
 	Indices = vector<uint>();
 	glGenBuffers(1, &VertexBuffer);
 	glGenBuffers(1, &IndexBuffer);	
@@ -37,6 +41,9 @@ ParticleSystem::~ParticleSystem()
 	for each(auto p in Af) {
 		delete(p);
 	}
+	for each(auto p in Ropes) {
+		delete(p);
+	}
 }
 
 void ParticleSystem::AddParticle(Particle * p)
@@ -47,9 +54,11 @@ void ParticleSystem::AddParticle(Particle * p)
 void ParticleSystem::BuildStructure()
 {
 	int ppr = sqrt(NumParticles);
-	for (int i = 0; i < ppr; i ++) {
-		P[i * ppr]->SetFix(true);
-	}	
+	if (!isEC) {
+		for (int i = 0; i < ppr; i++) {
+			P[i * ppr]->SetFix(true);
+		}
+	}
 	for (int i = 0; i < ppr; i++) {
 		for (int j = 0; j < ppr; j++) {
 			if (i != ppr - 1) {
@@ -98,6 +107,41 @@ void ParticleSystem::BuildStructure()
 	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(ModelVertex), &Vertices[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	if (isEC) {
+		auto rope = new RopeSystem();
+		rope->AddRope(P[P.size() - 1], vec3(-110.f, -100.f, -110.f));
+		Ropes.push_back(rope);
+		rope->BuildStructure();
+		auto p0 = rope->GetLastParticle();
+		rope = new RopeSystem();
+		rope->AddRope(P[0], vec3(110.f, -100.f, 110.f));
+		Ropes.push_back(rope);
+		rope->BuildStructure();
+		auto p1 = rope->GetLastParticle();
+		rope = new RopeSystem();
+		rope->AddRope(P[ppr - 1], vec3(110.f, -100.f, -110.f));
+		Ropes.push_back(rope);
+		rope->BuildStructure();
+		auto p2 = rope->GetLastParticle();
+		rope = new RopeSystem();
+		rope->AddRope(P[P.size() - ppr], vec3(-110.f, -100.f, 110.f));
+		Ropes.push_back(rope);
+		rope->BuildStructure();
+		auto p3 = rope->GetLastParticle();
+		auto sd = new SpringDamper(p0, p1, 0.5f);
+		sd->SpringConstant *= 100.f;
+		Sd.push_back(sd);
+		sd = new SpringDamper(p1, p2, 0.5f);
+		sd->SpringConstant *= 100.f;
+		Sd.push_back(sd);
+		sd = new SpringDamper(p2, p3, 0.5f);
+		sd->SpringConstant *= 100.f;
+		Sd.push_back(sd);
+		sd = new SpringDamper(p3, p0, 0.5f);
+		sd->SpringConstant *= 100.f;
+		Sd.push_back(sd);
+	}
 }
 
 void ParticleSystem::Update(float deltaTime, vec3 windDir)
@@ -119,6 +163,10 @@ void ParticleSystem::Update(float deltaTime, vec3 windDir)
 	for each(auto af in Af) {
 		af->ComputeForce(windDir);
 	}
+	for each (auto rope in Ropes)
+	{
+		rope->Update(deltaTime, windDir);
+	}
 	// Integrate
 	for (int i = 0; i < NumParticles; i++){
 		P[i]->Update(deltaTime); 
@@ -130,7 +178,7 @@ void ParticleSystem::Update(float deltaTime, vec3 windDir)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ParticleSystem::Draw(bool debug, const glm::mat4 & viewProjMtx, uint shader)
+void ParticleSystem::Draw(bool debug, const glm::mat4 & viewProjMtx, uint shader, uint ropeShader)
 {
 	/*if (debug) {
 		for each(auto p in P) {
@@ -168,6 +216,9 @@ void ParticleSystem::Draw(bool debug, const glm::mat4 & viewProjMtx, uint shader
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glUseProgram(0);
+	for each(auto rope in Ropes) {
+		rope->Draw(true, viewProjMtx, ropeShader);
+	}
 }
 
 void ParticleSystem::MoveLeft(bool isLeft)

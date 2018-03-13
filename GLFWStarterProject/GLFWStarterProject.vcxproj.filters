@@ -87,6 +87,9 @@
     <ClInclude Include="src\AerodynamicForce.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\RopeSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BallJoint.cpp">
@@ -161,6 +164,9 @@
     <ClCompile Include="src\AerodynamicForce.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RopeSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -195,6 +201,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Point.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Box.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Rope.glsl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

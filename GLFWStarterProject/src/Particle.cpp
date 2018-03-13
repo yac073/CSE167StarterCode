@@ -24,10 +24,11 @@ void Particle::Update(float deltaTime)
 	Velocity += deltaTime * (Force / Mass);
 	Position += deltaTime * Velocity;
 	Force = vec3(0.0f);
-	if(Position.y < -25.f)
+	if(Position.y < -5.f)
 	{
-		Position.y = 2 * -25.f - Position.y;
-		Velocity.y = -.5f * Velocity.y;
+		Position.y = 2 * -5.f - Position.y;
+		//Position.y = -5.f;
+		Velocity.y = -.1f * Velocity.y;
 		Velocity.x = (1.f - .7f) * Velocity.x; // cheezy
 		Velocity.z = (1.f - .7f) * Velocity.z; // cheezy
 	}
